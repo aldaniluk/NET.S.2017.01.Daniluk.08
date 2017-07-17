@@ -48,12 +48,22 @@ namespace Logic
 
         #region public methods
         /// <summary>
-        /// Overriding method converts Customer object into string representation with default format.
+        /// Overriding method converts Customer object into string representation with general format.
         /// </summary>
         /// <returns>String representation of the customer.</returns>
         public override string ToString()
         {
-            return this.ToString("1");
+            return this.ToString("1", CultureInfo.CurrentCulture);
+        }
+
+        /// <summary>
+        /// Converts Customer object into string representation.
+        /// </summary>
+        /// <param name="format">Format of string representation.</param>
+        /// <returns>String representation of the customer.</returns>
+        public string ToString(string format)
+        {
+            return this.ToString(format, CultureInfo.CurrentCulture);
         }
 
         /// <summary>
@@ -62,10 +72,10 @@ namespace Logic
         /// <param name="format">Format of string representation.</param>
         /// <param name="formatProvider">Format provider.</param>
         /// <returns>String representation of the customer.</returns>
-        public string ToString(string format, IFormatProvider formatProvider = null)
+        public string ToString(string format, IFormatProvider formatProvider)
         {
             if (string.IsNullOrEmpty(format)) format = "1";
-            if (ReferenceEquals(formatProvider, null)) formatProvider = CultureInfo.InvariantCulture;
+            if (ReferenceEquals(formatProvider, null)) formatProvider = CultureInfo.CurrentCulture;
 
             switch (format.ToUpperInvariant())
             {
